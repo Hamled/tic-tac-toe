@@ -144,6 +144,19 @@ describe('Game', function() {
         return game.play(validPosition);
       }).toThrowError(Error, 'Cannot play because that position is already marked');
     });
+
+    it('throws an Error when attempting to play after game has been won', function() {
+      var game = this.create();
+
+      const playPositions = [0, 2, 3, 5, 6];
+      playPositions.forEach(function(position) {
+        game.play(position);
+      });
+
+      expect(function() {
+        return game.play(8);
+      }).toThrowError(Error, 'Cannot play because game is already completed');
+    });
   });
 
   describe('#outcome', function() {
