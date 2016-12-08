@@ -19,5 +19,14 @@ describe('Game', function() {
         return new Game('Player X', 'Player O');
       }).not.toThrow();
     });
+
+    it('sets the player names', function() {
+      const playerX = 'Player X';
+      const playerO = 'Player O';
+      var game = new Game(playerX, playerO);
+
+      expect(game.playerX).toEqual(playerX);
+      expect(game.playerO).toEqual(playerO);
+    });
   });
 });
