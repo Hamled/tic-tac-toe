@@ -42,37 +42,27 @@ Game.prototype.play = function(position) {
 };
 
 Game.prototype.outcome = function() {
+  var board = this.board;
+  var isWin = function(pos1, pos2, pos3) {
+    return board[pos1] === board[pos2] &&
+           board[pos1] === board[pos3] &&
+           board[pos1] !== Game.EMPTY_CELL;
+  };
+
   // Determine the winner by checking:
-
-  // First, each row:
-  for(var row = 0; row < 3; row++) {
-    if(this.board[row * 3 + 0] === Game.EMPTY_CELL) {
-      continue;
-    }
-
-    if(this.board[row * 3 + 0] === this.board[row * 3 + 1] &&
-       this.board[row * 3 + 0] === this.board[row * 3 + 2]) {
-      return this.board[row * 3 + 0];
-    }
+  // All win conditions involving cell 0
+  if(isWin(0, 1, 2) || isWin(0, 3, 6) || isWin(0, 4, 8)) {
+    return board[0];
   }
 
-  // Second, each column:
-  for(var col = 0; col < 3; col++) {
-    if(this.board[0 * 3 + col] === Game.EMPTY_CELL) {
-      continue;
-    }
-
-    if(this.board[0 * 3 + col] === this.board[1 * 3 + col] &&
-       this.board[0 * 3 + col] === this.board[2 * 3 + col]) {
-      return this.board[0 * 3 + col];
-    }
+  // All win conditions involving cell 4
+  if(isWin(3, 4, 5) || isWin(1, 4, 7) || isWin(2, 4, 6)) {
+    return board[4];
   }
 
-  // Last, each diagonal:
-  if(((this.board[4] === this.board[0] && this.board[4] === this.board[8]) ||
-      (this.board[4] === this.board[2] && this.board[4] === this.board[6])) &&
-     this.board[4] !== Game.EMPTY_CELL) {
-    return this.board[4];
+  // All win conditions involving cell 8
+  if(isWin(6, 7, 8) || isWin(2, 5, 8)) {
+    return board[8];
   }
 
   // Otherwise, no clear winner. In that case it's a tie
