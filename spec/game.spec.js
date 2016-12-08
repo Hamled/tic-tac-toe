@@ -156,6 +156,14 @@ describe('Game', function() {
     });
   });
 
+  describe('#playerMark', function() {
+    it('can be called', function() {
+      var game = this.create();
+
+      expect(game.playerMark).toBeFunction();
+    });
+  });
+
   describe('.isValidPosition', function() {
     it('can be called', function() {
       expect(Game.isValidPosition).toBeFunction();

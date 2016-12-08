@@ -42,6 +42,10 @@ Game.prototype.boardAt = function(position) {
   return this.board[position];
 };
 
+Game.prototype.playerMark = function(player) {
+
+};
+
 // Static Methods
 Game.isValidPosition = function(position) {
   return Number.isInteger(position) && (position >= this.BOARD_POS_MIN &&
