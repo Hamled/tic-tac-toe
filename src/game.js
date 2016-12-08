@@ -19,8 +19,10 @@ Game.prototype.currentPlayer = function() {
                                : this.playerX;
 };
 
-Game.prototype.play = function() {
-
+Game.prototype.play = function(position) {
+  if(!Game.isValidPosition(position)) {
+    throw new Error('play() requires a valid board cell position');
+  }
 };
 
 // Static Methods
