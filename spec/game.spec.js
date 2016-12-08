@@ -146,6 +146,14 @@ describe('Game', function() {
     });
   });
 
+  describe('#outcome', function() {
+    it('can be called', function() {
+      var game = this.create();
+
+      expect(game.outcome).toBeFunction();
+    });
+  });
+
   describe('#boardAt', function() {
     it('can be called', function() {
       var game = this.create();
