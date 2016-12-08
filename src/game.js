@@ -31,6 +31,8 @@ Game.prototype.play = function(position) {
     throw new Error('Cannot play because game is already completed');
   }
 
+  this.board[position] = this.playerMark(this.currentPlayer());
+
   this.turn++;
 };
 

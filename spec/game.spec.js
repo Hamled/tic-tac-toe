@@ -113,6 +113,19 @@ describe('Game', function() {
         return game.play(validPosition);
       }).toThrowError(Error, 'Cannot play because game is already completed');
     });
+
+    it('sets the board cell at the given position to the current player\'s mark', function() {
+      var game = this.create();
+
+      // This results in a game that ends with an X win on the final turn (full board)
+      const playPositions = [0, 1, 3, 2, 4, 5, 7, 6, 8];
+      playPositions.forEach(function(position) {
+        const currentPlayer = game.currentPlayer();
+        game.play(position);
+
+        expect(game.boardAt(position)).toEqual(game.playerMark(currentPlayer));
+      });
+    });
   });
 
   describe('#boardAt', function() {
