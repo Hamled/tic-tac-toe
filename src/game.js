@@ -15,6 +15,7 @@ const Game = function(playerX, playerO) {
 Game.LAST_TURN = 9;
 Game.BOARD_POS_MIN = 0;
 Game.BOARD_POS_MAX = 8;
+Game.EMPTY_CELL = ' ';
 
 // Instance Methods
 Game.prototype.currentPlayer = function() {
@@ -29,6 +30,10 @@ Game.prototype.play = function(position) {
 
   if(this.turn > Game.LAST_TURN) {
     throw new Error('Cannot play because game is already completed');
+  }
+
+  if(this.board[position] !== Game.EMPTY_CELL) {
+    throw new Error('Cannot play because that position is already marked');
   }
 
   this.board[position] = this.playerMark(this.currentPlayer());

@@ -126,6 +126,16 @@ describe('Game', function() {
         expect(game.boardAt(position)).toEqual(game.playerMark(currentPlayer));
       });
     });
+
+    it('throws an Error when attempting to play in a marked cell', function() {
+      var game = this.create();
+
+      game.play(validPosition);
+
+      expect(function() {
+        return game.play(validPosition);
+      }).toThrowError(Error, 'Cannot play because that position is already marked');
+    });
   });
 
   describe('#boardAt', function() {
