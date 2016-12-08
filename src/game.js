@@ -95,6 +95,27 @@ Game.prototype.playerMark = function(player) {
   }
 };
 
+Game.prototype.printBoard = function() {
+  var board = this.board;
+  var printRow = function(row) {
+    var r0 = board[row * 3 + 0],
+        r1 = board[row * 3 + 1],
+        r2 = board[row * 3 + 2];
+
+    console.log(` ${r0} | ${r1} | ${r2} `);
+  };
+
+  var printDivider = function() {
+    console.log('---+---+---');
+  };
+
+  printRow(0);
+  printDivider();
+  printRow(1);
+  printDivider();
+  printRow(2);
+};
+
 // Static Methods
 Game.isValidPosition = function(position) {
   return Number.isInteger(position) && (position >= this.BOARD_POS_MIN &&
