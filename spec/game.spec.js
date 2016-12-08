@@ -42,6 +42,14 @@ describe('Game', function() {
 
       expect(game.turn).toEqual(1);
     });
+
+    it('starts with an empty board', function() {
+      var game = this.create();
+
+      game.board.forEach(function(cell) {
+        expect(cell).toEqual(Game.EMPTY_CELL);
+      });
+    });
   });
 
   describe('#currentPlayer', function() {
