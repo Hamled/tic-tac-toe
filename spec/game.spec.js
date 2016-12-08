@@ -69,6 +69,14 @@ describe('Game', function() {
     });
   });
 
+  describe('#play', function() {
+    it('can be called', function() {
+      var game = this.create();
+
+      expect(game.play).toBeFunction();
+    });
+  });
+
   describe('.isValidPosition', function() {
     it('can be called', function() {
       expect(Game.isValidPosition).toBeFunction();

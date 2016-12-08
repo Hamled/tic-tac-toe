@@ -19,6 +19,10 @@ Game.prototype.currentPlayer = function() {
                                : this.playerX;
 };
 
+Game.prototype.play = function() {
+
+};
+
 // Static Methods
 Game.isValidPosition = function(position) {
   return Number.isInteger(position) && (position >= this.BOARD_POS_MIN &&
