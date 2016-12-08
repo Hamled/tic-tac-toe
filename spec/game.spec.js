@@ -47,7 +47,25 @@ describe('Game', function() {
   describe('#currentPlayer', function() {
     it('can be called', function() {
       var game = this.create();
+
       expect(game.currentPlayer).toBeFunction();
+    });
+
+    it('starts with X player', function() {
+      var game = this.create();
+
+      expect(game.currentPlayer()).toEqual(this.playerX);
+    });
+
+    it('alternates between players on each turn', function() {
+      var game = this.create();
+
+      while(game.turn <= Game.LAST_TURN) {
+        expect(game.currentPlayer()).toEqual(this.playerX);
+        game.turn += 1;
+        expect(game.currentPlayer()).toEqual(this.playerO);
+        game.turn += 1;
+      }
     });
   });
 });
