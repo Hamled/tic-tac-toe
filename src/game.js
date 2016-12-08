@@ -6,9 +6,9 @@ const Game = function(playerX, playerO) {
   this.playerX = playerX;
   this.playerO = playerO;
   this.turn = 1;
-  this.board = [' ', ' ', ' ',
-                ' ', ' ', ' ',
-                ' ', ' ', ' '];
+
+  this.board = new Array(Game.BOARD_POS_MAX + 1);
+  this.board.fill(Game.EMPTY_CELL);
 };
 
 // Constants
