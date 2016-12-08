@@ -93,6 +93,17 @@ describe('Game', function() {
         }).toThrowError(Error, 'play() requires a valid board cell position');
       });
     });
+
+    const validPosition = Game.BOARD_POS_MIN;
+
+    it('increments the turn count', function() {
+      var game = this.create();
+      var originalTurn = game.turn;
+
+      game.play(validPosition);
+
+      expect(game.turn).toEqual(originalTurn + 1);
+    });
   });
 
   describe('.isValidPosition', function() {

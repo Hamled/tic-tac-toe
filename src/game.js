@@ -23,6 +23,8 @@ Game.prototype.play = function(position) {
   if(!Game.isValidPosition(position)) {
     throw new Error('play() requires a valid board cell position');
   }
+
+  this.turn++;
 };
 
 // Static Methods
