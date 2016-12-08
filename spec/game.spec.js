@@ -115,6 +115,14 @@ describe('Game', function() {
     });
   });
 
+  describe('#boardAt', function() {
+    it('can be called', function() {
+      var game = this.create();
+
+      expect(game.boardAt).toBeFunction();
+    });
+  });
+
   describe('.isValidPosition', function() {
     it('can be called', function() {
       expect(Game.isValidPosition).toBeFunction();

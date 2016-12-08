@@ -31,6 +31,10 @@ Game.prototype.play = function(position) {
   this.turn++;
 };
 
+Game.prototype.boardAt = function() {
+
+};
+
 // Static Methods
 Game.isValidPosition = function(position) {
   return Number.isInteger(position) && (position >= this.BOARD_POS_MIN &&
