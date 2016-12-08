@@ -42,7 +42,49 @@ Game.prototype.play = function(position) {
 };
 
 Game.prototype.outcome = function() {
+  // Determine the winner by checking:
 
+  // First, each row:
+  for(var row = 0; row < 3; row++) {
+    if(this.board[row * 3 + 0] === Game.EMPTY_CELL) {
+      continue;
+    }
+
+    if(this.board[row * 3 + 0] === this.board[row * 3 + 1] &&
+       this.board[row * 3 + 0] === this.board[row * 3 + 2]) {
+      return this.board[row * 3 + 0];
+    }
+  }
+
+  // Second, each column:
+  for(var col = 0; col < 3; col++) {
+    if(this.board[0 * 3 + col] === Game.EMPTY_CELL) {
+      continue;
+    }
+
+    if(this.board[0 * 3 + col] === this.board[1 * 3 + col] &&
+       this.board[0 * 3 + col] === this.board[2 * 3 + col]) {
+      return this.board[0 * 3 + col];
+    }
+  }
+
+  // Last, each diagonal:
+  if(((this.board[4] === this.board[0] && this.board[4] === this.board[8]) ||
+      (this.board[4] === this.board[2] && this.board[4] === this.board[6])) &&
+     this.board[4] !== Game.EMPTY_CELL) {
+    return this.board[4];
+  }
+
+  // Otherwise, no clear winner. In that case it's a tie
+  // only if the board is completely filled.
+  var outcome = Game.EMPTY_CELL; // EMPTY_CELL means tie
+  this.board.forEach(function(cell) {
+    if(cell === Game.EMPTY_CELL) {
+      outcome = null; // No winner yet
+    }
+  });
+
+  return outcome;
 };
 
 Game.prototype.boardAt = function(position) {

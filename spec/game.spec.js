@@ -147,10 +147,56 @@ describe('Game', function() {
   });
 
   describe('#outcome', function() {
-    it('can be called', function() {
-      var game = this.create();
+    beforeEach(function() {
+      this.game = this.create();
 
-      expect(game.outcome).toBeFunction();
+      this.expectOutcome = function(positions, expected) {
+        var game = this.game;
+        positions.forEach(function(position) {
+          game.play(position);
+        });
+
+        expect(game.outcome()).toEqual(expected);
+      };
+    });
+
+    it('can be called', function() {
+      expect(this.game.outcome).toBeFunction();
+    });
+
+    it('returns null if the game is not yet won', function() {
+      expect(this.game.outcome()).toBeNull();
+
+      const playPositions = [0, 4, 2, 1, 7, 3, 5, 8];
+
+      this.expectOutcome(playPositions, null);
+    });
+
+    it('returns EMPTY_CELL if the game is a tie', function() {
+      const playPositions = [0, 4, 2, 1, 7, 3, 5, 8, 6];
+
+      // Sanity check
+      expect(new Set(playPositions).size).toEqual(Game.LAST_TURN);
+
+      this.expectOutcome(playPositions, Game.EMPTY_CELL);
+    });
+
+    it('returns X if game has been won by player X (partial board)', function() {
+      const playPositions = [0, 2, 3, 4, 6];
+
+      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerX));
+    });
+
+    it('returns X if game has been won by player X (full board)', function() {
+      const playPositions = [0, 1, 3, 2, 4, 5, 7, 6, 8];
+
+      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerX));
+    });
+
+    it('returns O if game has been won by player O (partial board)', function() {
+      const playPositions = [0, 2, 3, 6, 4, 8, 7, 5];
+
+      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerO));
     });
   });
 
