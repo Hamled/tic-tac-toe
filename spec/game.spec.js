@@ -38,7 +38,7 @@ describe('Game', function() {
     });
 
     it('sets turn count to be 1', function() {
-      var game = new Game('Player X', 'Player O');
+      var game = this.create();
 
       expect(game.turn).toEqual(1);
     });
