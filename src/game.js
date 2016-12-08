@@ -5,6 +5,7 @@ const Game = function(playerX, playerO) {
 
   this.playerX = playerX;
   this.playerO = playerO;
+  this.turn = 1;
 };
 
 export default Game;

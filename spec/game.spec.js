@@ -28,5 +28,11 @@ describe('Game', function() {
       expect(game.playerX).toEqual(playerX);
       expect(game.playerO).toEqual(playerO);
     });
+
+    it('sets turn count to be 1', function() {
+      var game = new Game('Player X', 'Player O');
+
+      expect(game.turn).toEqual(1);
+    });
   });
 });
