@@ -68,4 +68,30 @@ describe('Game', function() {
       }
     });
   });
+
+  describe('.isValidPosition', function() {
+    it('can be called', function() {
+      expect(Game.isValidPosition).toBeFunction();
+    });
+
+    it('returns false if the given position is invalid', function() {
+      var invalidArgs = {
+        empty: [],
+        notANumber: ['Not A Number'],
+        notInteger: [1.5],
+        outOfRangeMin: [Game.BOARD_POS_MIN - 1],
+        outOfRangeMax: [Game.BOARD_POS_MAX + 1]
+      };
+
+      Object.values(invalidArgs).forEach(function(args) {
+        expect(Game.isValidPosition.apply(Game, args)).toBeFalsy();
+      });
+    });
+
+    it('returns true if the given position is valid', function() {
+      for(var pos = Game.BOARD_POS_MIN; pos <= Game.BOARD_POS_MAX; pos++) {
+        expect(Game.isValidPosition(pos)).toBeTruthy();
+      }
+    });
+  });
 });

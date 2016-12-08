@@ -10,10 +10,19 @@ const Game = function(playerX, playerO) {
 
 // Constants
 Game.LAST_TURN = 9;
+Game.BOARD_POS_MIN = 0;
+Game.BOARD_POS_MAX = 8;
 
+// Instance Methods
 Game.prototype.currentPlayer = function() {
   return (this.turn % 2 === 0) ? this.playerO
                                : this.playerX;
+};
+
+// Static Methods
+Game.isValidPosition = function(position) {
+  return Number.isInteger(position) && (position >= this.BOARD_POS_MIN &&
+                                        position <= this.BOARD_POS_MAX);
 };
 
 export default Game;
