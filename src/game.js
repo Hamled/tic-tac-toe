@@ -6,6 +6,9 @@ const Game = function(playerX, playerO) {
   this.playerX = playerX;
   this.playerO = playerO;
   this.turn = 1;
+  this.board = [' ', ' ', ' ',
+                ' ', ' ', ' ',
+                ' ', ' ', ' '];
 };
 
 // Constants
@@ -35,6 +38,8 @@ Game.prototype.boardAt = function(position) {
   if(!Game.isValidPosition(position)) {
     throw new Error('boardAt() requires a valid board cell position');
   }
+
+  return this.board[position];
 };
 
 // Static Methods

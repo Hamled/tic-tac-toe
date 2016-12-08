@@ -139,6 +139,21 @@ describe('Game', function() {
         }).toThrowError(Error, 'boardAt() requires a valid board cell position');
       });
     });
+
+    it('returns the value from the board cell at the given position', function() {
+      var game = this.create();
+
+      // Setup the board with specific values
+      // NOTE: This is very implementation-specific code and may break later
+      for(var pos = Game.BOARD_POS_MIN; pos <= Game.BOARD_POS_MAX; pos++) {
+        game.board[pos] = 'value'+pos;
+      }
+
+      // Check that boardAt gives the right value for each
+      for(pos = Game.BOARD_POS_MIN; pos <= Game.BOARD_POS_MAX; pos++) {
+        expect(game.boardAt(pos)).toEqual('value'+pos);
+      }
+    });
   });
 
   describe('.isValidPosition', function() {
