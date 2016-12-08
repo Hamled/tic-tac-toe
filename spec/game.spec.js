@@ -162,6 +162,31 @@ describe('Game', function() {
 
       expect(game.playerMark).toBeFunction();
     });
+
+    it('throws an Error when not given one of the game\'s players', function() {
+      var game = this.create();
+
+      const notAPlayer = 'Not A Player';
+      // Sanity check
+      expect(notAPlayer).not.toEqual(game.playerX);
+      expect(notAPlayer).not.toEqual(game.playerO);
+
+      expect(function() {
+        return game.playerMark(notAPlayer);
+      }).toThrowError(Error, `${notAPlayer} is not one of the game's players`);
+    });
+
+    it('returns X for the player using X', function() {
+      var game = this.create();
+
+      expect(game.playerMark(this.playerX)).toEqual('X');
+    });
+
+    it('returns O for the player using O', function() {
+      var game = this.create();
+
+      expect(game.playerMark(this.playerO)).toEqual('O');
+    });
   });
 
   describe('.isValidPosition', function() {

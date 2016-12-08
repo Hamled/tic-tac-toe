@@ -43,7 +43,13 @@ Game.prototype.boardAt = function(position) {
 };
 
 Game.prototype.playerMark = function(player) {
-
+  if(player === this.playerX) {
+    return 'X';
+  } else if(player === this.playerO) {
+    return 'O';
+  } else {
+    throw new Error(`${player} is not one of the game's players`);
+  }
 };
 
 // Static Methods
