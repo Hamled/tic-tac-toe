@@ -8,4 +8,7 @@ const Game = function(playerX, playerO) {
   this.turn = 1;
 };
 
+Game.prototype.currentPlayer = function() {
+};
+
 export default Game;

@@ -1,6 +1,14 @@
 import Game from 'game';
 
 describe('Game', function() {
+  beforeEach(function() {
+    this.playerX = 'Player X';
+    this.playerO = 'Player O';
+    this.create = function() {
+      return new Game(this.playerX, this.playerO);
+    };
+  });
+
   describe('.constructor', function() {
     it('can be called', function() {
       expect(Game).toBeFunction();
@@ -33,6 +41,13 @@ describe('Game', function() {
       var game = new Game('Player X', 'Player O');
 
       expect(game.turn).toEqual(1);
+    });
+  });
+
+  describe('#currentPlayer', function() {
+    it('can be called', function() {
+      var game = this.create();
+      expect(game.currentPlayer).toBeFunction();
     });
   });
 });
