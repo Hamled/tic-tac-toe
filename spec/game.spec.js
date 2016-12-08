@@ -121,6 +121,24 @@ describe('Game', function() {
 
       expect(game.boardAt).toBeFunction();
     });
+
+    it('throws an Error when not given a valid position argument', function() {
+      var game = this.create();
+
+      var invalidArgs = {
+        empty: [],
+        notANumber: ['Not A Number'],
+        notInteger: [1.5],
+        outOfRangeMin: [Game.BOARD_POS_MIN - 1],
+        outOfRangeMax: [Game.BOARD_POS_MAX + 1]
+      };
+
+      Object.values(invalidArgs).forEach(function(args) {
+        expect(function() {
+          return game.boardAt.apply(game, args);
+        }).toThrowError(Error, 'boardAt() requires a valid board cell position');
+      });
+    });
   });
 
   describe('.isValidPosition', function() {
