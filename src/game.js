@@ -24,6 +24,10 @@ Game.prototype.play = function(position) {
     throw new Error('play() requires a valid board cell position');
   }
 
+  if(this.turn > Game.LAST_TURN) {
+    throw new Error('Cannot play because game is already completed');
+  }
+
   this.turn++;
 };
 

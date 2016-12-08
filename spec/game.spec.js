@@ -104,6 +104,15 @@ describe('Game', function() {
 
       expect(game.turn).toEqual(originalTurn + 1);
     });
+
+    it('throws an Error when maximum turns have been reached', function() {
+      var game = this.create();
+      game.turn = Game.LAST_TURN + 1; // The + 1 means last turn has been played
+
+      expect(function() {
+        return game.play(validPosition);
+      }).toThrowError(Error, 'Cannot play because game is already completed');
+    });
   });
 
   describe('.isValidPosition', function() {
