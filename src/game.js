@@ -1,3 +1,5 @@
+const instanceProps = {};
+
 const Game = function(options) {
   if(!options || options.playerX === undefined || options.playerO === undefined) {
     throw new Error('Game must be given two player names');
@@ -18,12 +20,12 @@ Game.BOARD_POS_MAX = 8;
 Game.EMPTY_CELL = ' ';
 
 // Instance Methods
-Game.prototype.currentPlayer = function() {
+instanceProps.currentPlayer = function() {
   return (this.turn % 2 === 0) ? this.playerO
                                : this.playerX;
 };
 
-Game.prototype.play = function(position) {
+instanceProps.play = function(position) {
   if(!Game.isValidPosition(position)) {
     throw new Error('play() requires a valid board cell position');
   }
@@ -41,7 +43,7 @@ Game.prototype.play = function(position) {
   this.turn++;
 };
 
-Game.prototype.outcome = function() {
+instanceProps.outcome = function() {
   var board = this.board;
   var isWin = function(pos1, pos2, pos3) {
     return board[pos1] === board[pos2] &&
@@ -77,7 +79,7 @@ Game.prototype.outcome = function() {
   return outcome;
 };
 
-Game.prototype.boardAt = function(position) {
+instanceProps.boardAt = function(position) {
   if(!Game.isValidPosition(position)) {
     throw new Error('boardAt() requires a valid board cell position');
   }
@@ -85,7 +87,7 @@ Game.prototype.boardAt = function(position) {
   return this.board[position];
 };
 
-Game.prototype.playerMark = function(player) {
+instanceProps.playerMark = function(player) {
   if(player === this.playerX) {
     return 'X';
   } else if(player === this.playerO) {
@@ -95,7 +97,7 @@ Game.prototype.playerMark = function(player) {
   }
 };
 
-Game.prototype.printBoard = function() {
+instanceProps.printBoard = function() {
   var board = this.board;
   var printRow = function(row) {
     var r0 = board[row * 3 + 0],
