@@ -1,6 +1,6 @@
 const instanceProps = {};
 
-const Game = function(options) {
+instanceProps.initialize = function(options) {
   if(!options || options.playerX === undefined || options.playerO === undefined) {
     throw new Error('Game must be given two player names');
   }
