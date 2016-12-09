@@ -112,16 +112,18 @@ instanceProps.printBoard = function() {
   printRow(2);
 };
 
+const staticProps = {};
+
 // Static Methods
-Game.isValidPosition = function(position) {
+staticProps.isValidPosition = function(position) {
   return Number.isInteger(position) && (position >= this.BOARD_POS_MIN &&
                                         position <= this.BOARD_POS_MAX);
 };
 
 // Constants
-Game.LAST_TURN = 9;
-Game.BOARD_POS_MIN = 0;
-Game.BOARD_POS_MAX = 8;
-Game.EMPTY_CELL = ' ';
+staticProps.LAST_TURN = 9;
+staticProps.BOARD_POS_MIN = 0;
+staticProps.BOARD_POS_MAX = 8;
+staticProps.EMPTY_CELL = ' ';
 
 export default Game;
