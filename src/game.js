@@ -1,3 +1,5 @@
+import Backbone from 'backbone';
+
 const instanceProps = {};
 
 instanceProps.initialize = function(options) {
@@ -126,4 +128,5 @@ staticProps.BOARD_POS_MIN = 0;
 staticProps.BOARD_POS_MAX = 8;
 staticProps.EMPTY_CELL = ' ';
 
+const Game = Backbone.Model.extend(instanceProps, staticProps);
 export default Game;
