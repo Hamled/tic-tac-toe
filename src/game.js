@@ -93,25 +93,30 @@ instanceProps.playerMark = function(player) {
   }
 };
 
-instanceProps.printBoard = function() {
+instanceProps.boardString = function() {
   var board = this.board;
-  var printRow = function(row) {
+  var rowString = function(row) {
     var r0 = board[row * 3 + 0],
         r1 = board[row * 3 + 1],
         r2 = board[row * 3 + 2];
 
-    console.log(` ${r0} | ${r1} | ${r2} `);
+    return ` ${r0} | ${r1} | ${r2} \n`;
   };
 
-  var printDivider = function() {
-    console.log('---+---+---');
+  var dividerString = function() {
+    return '---+---+---\n';
   };
 
-  printRow(0);
-  printDivider();
-  printRow(1);
-  printDivider();
-  printRow(2);
+  return (
+    rowString(0) +
+    dividerString() +
+    rowString(1) +
+    dividerString() +
+    rowString(2));
+};
+
+instanceProps.printBoard = function() {
+  console.log(this.boardString());
 };
 
 const staticProps = {};
