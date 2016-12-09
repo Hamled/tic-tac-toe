@@ -13,12 +13,6 @@ const Game = function(options) {
   this.board.fill(Game.EMPTY_CELL);
 };
 
-// Constants
-Game.LAST_TURN = 9;
-Game.BOARD_POS_MIN = 0;
-Game.BOARD_POS_MAX = 8;
-Game.EMPTY_CELL = ' ';
-
 // Instance Methods
 instanceProps.currentPlayer = function() {
   return (this.turn % 2 === 0) ? this.playerO
@@ -123,5 +117,11 @@ Game.isValidPosition = function(position) {
   return Number.isInteger(position) && (position >= this.BOARD_POS_MIN &&
                                         position <= this.BOARD_POS_MAX);
 };
+
+// Constants
+Game.LAST_TURN = 9;
+Game.BOARD_POS_MIN = 0;
+Game.BOARD_POS_MAX = 8;
+Game.EMPTY_CELL = ' ';
 
 export default Game;
