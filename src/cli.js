@@ -49,7 +49,10 @@ const printHelp = function() {
 // 3. make move
 const gameLoop = function(session) {
   const gameFromSession = function(session) {
-    return new Game(session.playerX, session.playerO);
+    return new Game({
+      playerX: session.playerX,
+      playerO: session.playerO
+    });
   };
 
   const promptSchema = function(game) {

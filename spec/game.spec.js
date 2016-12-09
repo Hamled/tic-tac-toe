@@ -5,7 +5,10 @@ describe('Game', function() {
     this.playerX = 'Player X';
     this.playerO = 'Player O';
     this.create = function() {
-      return new Game(this.playerX, this.playerO);
+      return new Game({
+        playerX: this.playerX,
+        playerO: this.playerO
+      });
     };
   });
 
@@ -20,18 +23,30 @@ describe('Game', function() {
       }).toThrowError(Error, 'Game must be given two player names');
 
       expect(function() {
-        return new Game('Player X');
+        return new Game({});
       }).toThrowError(Error, 'Game must be given two player names');
 
       expect(function() {
-        return new Game('Player X', 'Player O');
+        return new Game({
+          playerX: 'Player X'
+        });
+      }).toThrowError(Error, 'Game must be given two player names');
+
+      expect(function() {
+        return new Game({
+          playerX: 'Player X',
+          playerO: 'Player O'
+        });
       }).not.toThrow();
     });
 
     it('sets the player names', function() {
       const playerX = 'Player X';
       const playerO = 'Player O';
-      var game = new Game(playerX, playerO);
+      var game = new Game({
+        playerX: playerX,
+        playerO: playerO
+      });
 
       expect(game.playerX).toEqual(playerX);
       expect(game.playerO).toEqual(playerO);

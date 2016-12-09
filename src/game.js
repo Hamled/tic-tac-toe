@@ -1,10 +1,10 @@
-const Game = function(playerX, playerO) {
-  if(playerX === undefined || playerO === undefined) {
+const Game = function(options) {
+  if(!options || options.playerX === undefined || options.playerO === undefined) {
     throw new Error('Game must be given two player names');
   }
 
-  this.playerX = playerX;
-  this.playerO = playerO;
+  this.playerX = options.playerX;
+  this.playerO = options.playerO;
   this.turn = 1;
 
   this.board = new Array(Game.BOARD_POS_MAX + 1);
