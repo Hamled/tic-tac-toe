@@ -8,8 +8,8 @@ instanceProps.initialize = function(options) {
   }
 
   // Create an empty board
-  this.board = new Array(Game.BOARD_POS_MAX + 1);
-  this.board.fill(Game.EMPTY_CELL);
+  const board = new Array(Game.BOARD_POS_MAX + 1);
+  board.fill(Game.EMPTY_CELL);
 
   // Set all of the attributes for persistence
   this.set({
@@ -18,6 +18,7 @@ instanceProps.initialize = function(options) {
       options.playerO
     ],
     outcome: this.outcome,
+    board: board,
     played_at: new Date() // Played at is the starting date
   });
 
@@ -48,43 +49,45 @@ instanceProps.play = function(position) {
     throw new Error('Cannot play because game is already completed');
   }
 
-  if(this.board[position] !== Game.EMPTY_CELL) {
+  if(this.boardAt(position) !== Game.EMPTY_CELL) {
     throw new Error('Cannot play because that position is already marked');
   }
 
-  this.board[position] = this.playerMark(this.currentPlayer());
+  this.get('board')[position] = this.playerMark(this.currentPlayer());
+  this.trigger('change:board', this);
+  this.trigger('change', this);
 
   this.turn++;
 };
 
 instanceProps.outcome = function() {
-  var board = this.board;
+  var self = this;
   var isWin = function(pos1, pos2, pos3) {
-    return board[pos1] === board[pos2] &&
-           board[pos1] === board[pos3] &&
-           board[pos1] !== Game.EMPTY_CELL;
+    return self.boardAt(pos1) === self.boardAt(pos2) &&
+           self.boardAt(pos1) === self.boardAt(pos3) &&
+           self.boardAt(pos1) !== Game.EMPTY_CELL;
   };
 
   // Determine the winner by checking:
   // All win conditions involving cell 0
   if(isWin(0, 1, 2) || isWin(0, 3, 6) || isWin(0, 4, 8)) {
-    return board[0];
+    return this.boardAt(0);
   }
 
   // All win conditions involving cell 4
   if(isWin(3, 4, 5) || isWin(1, 4, 7) || isWin(2, 4, 6)) {
-    return board[4];
+    return this.boardAt(4);
   }
 
   // All win conditions involving cell 8
   if(isWin(6, 7, 8) || isWin(2, 5, 8)) {
-    return board[8];
+    return this.boardAt(8);
   }
 
   // Otherwise, no clear winner. In that case it's a tie
   // only if the board is completely filled.
   var outcome = Game.EMPTY_CELL; // EMPTY_CELL means tie
-  this.board.forEach(function(cell) {
+  this.get('board').forEach(function(cell) {
     if(cell === Game.EMPTY_CELL) {
       outcome = null; // No winner yet
     }
@@ -98,7 +101,7 @@ instanceProps.boardAt = function(position) {
     throw new Error('boardAt() requires a valid board cell position');
   }
 
-  return this.board[position];
+  return this.get('board')[position];
 };
 
 instanceProps.playerMark = function(player) {
@@ -112,11 +115,11 @@ instanceProps.playerMark = function(player) {
 };
 
 instanceProps.boardString = function() {
-  var board = this.board;
+  var self = this;
   var rowString = function(row) {
-    var r0 = board[row * 3 + 0],
-        r1 = board[row * 3 + 1],
-        r2 = board[row * 3 + 2];
+    var r0 = self.boardAt(row * 3 + 0),
+        r1 = self.boardAt(row * 3 + 1),
+        r2 = self.boardAt(row * 3 + 2);
 
     return ` ${r0} | ${r1} | ${r2} \n`;
   };

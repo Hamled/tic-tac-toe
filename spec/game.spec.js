@@ -61,7 +61,7 @@ describe('Game', function() {
     it('starts with an empty board', function() {
       var game = this.create();
 
-      game.board.forEach(function(cell) {
+      game.get('board').forEach(function(cell) {
         expect(cell).toEqual(Game.EMPTY_CELL);
       });
     });
@@ -259,7 +259,7 @@ describe('Game', function() {
       // Setup the board with specific values
       // NOTE: This is very implementation-specific code and may break later
       for(var pos = Game.BOARD_POS_MIN; pos <= Game.BOARD_POS_MAX; pos++) {
-        game.board[pos] = 'value'+pos;
+        game.get('board')[pos] = 'value'+pos;
       }
 
       // Check that boardAt gives the right value for each
