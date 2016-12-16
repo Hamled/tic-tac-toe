@@ -17,7 +17,8 @@ instanceProps.initialize = function(options) {
       options.playerX,
       options.playerO
     ],
-    outcome: this.outcome
+    outcome: this.outcome,
+    played_at: new Date() // Played at is the starting date
   });
 
   // Tracking turns happens behind the scenes and is not an attribute
