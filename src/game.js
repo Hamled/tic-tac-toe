@@ -1,4 +1,4 @@
-import Backbone from 'backbone';
+import Base from 'base';
 
 const instanceProps = {};
 
@@ -16,7 +16,8 @@ instanceProps.initialize = function(options) {
     players: [
       options.playerX,
       options.playerO
-    ]
+    ],
+    outcome: this.outcome
   });
 
   // Tracking turns happens behind the scenes and is not an attribute
@@ -149,5 +150,8 @@ staticProps.BOARD_POS_MIN = 0;
 staticProps.BOARD_POS_MAX = 8;
 staticProps.EMPTY_CELL = ' ';
 
-const Game = Backbone.Model.extend(instanceProps, staticProps);
+// Inherit from the Base model instead of Backbone.Model
+// this allows us to use the custom overrides from Base.
+// Check out base.js for more details.
+const Game = Base.extend(instanceProps, staticProps);
 export default Game;

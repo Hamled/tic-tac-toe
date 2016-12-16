@@ -56,7 +56,7 @@ const gameLoop = function(session) {
   };
 
   const promptSchema = function(game) {
-    const commandSchema = game.outcome() === null ? {
+    const commandSchema = game.get('outcome') === null ? {
       description: game.currentPlayer() + ' make a move, or ? for help',
       pattern: /^([1-9]|restart|exit|\?)$/,
       message: 'Input must be a valid board position, or ? for help',
@@ -84,7 +84,7 @@ const gameLoop = function(session) {
   session.game.printBoard();
 
   // Indicate if anyone has won
-  const outcome = session.game.outcome();
+  const outcome = session.game.get('outcome');
   if(outcome !== null) {
     process.stdout.write('Game over! ');
 
