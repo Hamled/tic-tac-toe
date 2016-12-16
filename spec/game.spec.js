@@ -48,8 +48,8 @@ describe('Game', function() {
         playerO: playerO
       });
 
-      expect(game.playerX).toEqual(playerX);
-      expect(game.playerO).toEqual(playerO);
+      expect(game.playerX()).toEqual(playerX);
+      expect(game.playerO()).toEqual(playerO);
     });
 
     it('sets turn count to be 1', function() {
@@ -212,19 +212,19 @@ describe('Game', function() {
     it('returns X if game has been won by player X (partial board)', function() {
       const playPositions = [0, 2, 3, 4, 6];
 
-      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerX));
+      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerX()));
     });
 
     it('returns X if game has been won by player X (full board)', function() {
       const playPositions = [0, 1, 3, 2, 4, 5, 7, 6, 8];
 
-      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerX));
+      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerX()));
     });
 
     it('returns O if game has been won by player O (partial board)', function() {
       const playPositions = [0, 2, 3, 6, 4, 8, 7, 5];
 
-      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerO));
+      this.expectOutcome(playPositions, this.game.playerMark(this.game.playerO()));
     });
   });
 
@@ -281,8 +281,8 @@ describe('Game', function() {
 
       const notAPlayer = 'Not A Player';
       // Sanity check
-      expect(notAPlayer).not.toEqual(game.playerX);
-      expect(notAPlayer).not.toEqual(game.playerO);
+      expect(notAPlayer).not.toEqual(game.playerX());
+      expect(notAPlayer).not.toEqual(game.playerO());
 
       expect(function() {
         return game.playerMark(notAPlayer);

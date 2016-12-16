@@ -7,18 +7,34 @@ instanceProps.initialize = function(options) {
     throw new Error('Game must be given two player names');
   }
 
-  this.playerX = options.playerX;
-  this.playerO = options.playerO;
-  this.turn = 1;
-
+  // Create an empty board
   this.board = new Array(Game.BOARD_POS_MAX + 1);
   this.board.fill(Game.EMPTY_CELL);
+
+  // Set all of the attributes for persistence
+  this.set({
+    players: [
+      options.playerX,
+      options.playerO
+    ]
+  });
+
+  // Tracking turns happens behind the scenes and is not an attribute
+  this.turn = 1;
 };
 
 // Instance Methods
+instanceProps.playerX = function() {
+  return this.get('players')[0];
+};
+
+instanceProps.playerO = function() {
+  return this.get('players')[1];
+};
+
 instanceProps.currentPlayer = function() {
-  return (this.turn % 2 === 0) ? this.playerO
-                               : this.playerX;
+  return (this.turn % 2 === 0) ? this.playerO()
+                               : this.playerX();
 };
 
 instanceProps.play = function(position) {
@@ -84,9 +100,9 @@ instanceProps.boardAt = function(position) {
 };
 
 instanceProps.playerMark = function(player) {
-  if(player === this.playerX) {
+  if(player === this.playerX()) {
     return 'X';
-  } else if(player === this.playerO) {
+  } else if(player === this.playerO()) {
     return 'O';
   } else {
     throw new Error(`${player} is not one of the game's players`);
