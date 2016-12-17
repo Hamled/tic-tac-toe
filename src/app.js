@@ -25,6 +25,7 @@ const GameView = Backbone.View.extend({
 
 $(function() {
   const game = new Game({
+    id: 1,
     playerX: 'Charles',
     playerO: 'Computer'
   });
@@ -34,5 +35,7 @@ $(function() {
     model: game
   });
 
-  gameView.render();
+  game.fetch().done(function() {
+    gameView.render();
+  });
 });

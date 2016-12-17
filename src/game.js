@@ -1,6 +1,8 @@
 import Base from 'base';
 
-const instanceProps = {};
+const instanceProps = {
+  urlRoot: 'http://localhost:3000/api/v1/games/'
+};
 
 instanceProps.initialize = function(options) {
   if(!options || options.playerX === undefined || options.playerO === undefined) {
