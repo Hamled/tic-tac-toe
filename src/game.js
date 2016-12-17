@@ -11,6 +11,10 @@ instanceProps.initialize = function(options) {
   const board = new Array(Game.BOARD_POS_MAX + 1);
   board.fill(Game.EMPTY_CELL);
 
+  // Remove the separate player name attributes
+  this.unset('playerX');
+  this.unset('playerO');
+
   // Set all of the attributes for persistence
   this.set({
     players: [
