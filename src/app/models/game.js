@@ -1,4 +1,4 @@
-import Base from 'base';
+import Base from 'app/models/base';
 
 // Inherit from the Base model instead of Backbone.Model
 // this allows us to use the custom overrides from Base.

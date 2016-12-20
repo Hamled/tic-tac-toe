@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
-import Game from 'game';
+import Game from 'app/models/game';
 
 const GameView = Backbone.View.extend({
   render: function() {
