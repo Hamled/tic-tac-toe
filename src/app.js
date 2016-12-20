@@ -1,27 +1,6 @@
 import $ from 'jquery';
-import Backbone from 'backbone';
 import Game from 'app/models/game';
-
-const GameView = Backbone.View.extend({
-  render: function() {
-    this.$el.html(`
-      <pre>${this.model.boardString()}</pre>
-      <input type="text" name="position">
-      <button>Play</button>`);
-
-    this.delegateEvents();
-  },
-
-  events: {
-    'click button': 'onPlay'
-  },
-
-  onPlay: function(e) {
-    var pos = this.$('input').val();
-    this.model.play(Number.parseInt(pos));
-    this.render();
-  }
-});
+import GameView from 'app/views/game_view';
 
 $(function() {
   const game = new Game({
