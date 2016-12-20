@@ -1,6 +1,9 @@
 import Base from 'base';
 
-const instanceProps = {
+// Inherit from the Base model instead of Backbone.Model
+// this allows us to use the custom overrides from Base.
+// Check out base.js for more details.
+const Game = Base.extend({
   urlRoot: 'http://localhost:3000/api/v1/games/',
 
   initialize: function(options) {
@@ -144,9 +147,7 @@ const instanceProps = {
   printBoard: function() {
     console.log(this.boardString());
   }
-};
-
-const staticProps = {
+}, {
 
   // Static Methods
   isValidPosition: function(position) {
@@ -159,10 +160,6 @@ const staticProps = {
   BOARD_POS_MIN: 0,
   BOARD_POS_MAX: 8,
   EMPTY_CELL: ' '
-};
+});
 
-// Inherit from the Base model instead of Backbone.Model
-// this allows us to use the custom overrides from Base.
-// Check out base.js for more details.
-const Game = Base.extend(instanceProps, staticProps);
 export default Game;
