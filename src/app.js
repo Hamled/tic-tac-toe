@@ -4,7 +4,6 @@ import GameView from 'app/views/game_view';
 
 $(function() {
   const game = new Game({
-    id: 1,
     playerX: 'Charles',
     playerO: 'Computer'
   });
@@ -14,7 +13,5 @@ $(function() {
     model: game
   });
 
-  game.fetch().done(function() {
-    gameView.render();
-  });
+  gameView.render();
 });
