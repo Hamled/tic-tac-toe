@@ -1,10 +1,9 @@
 import Base from 'base';
 
 const instanceProps = {
-  urlRoot: 'http://localhost:3000/api/v1/games/'
-};
+  urlRoot: 'http://localhost:3000/api/v1/games/',
 
-  instanceProps.initialize = function(options) {
+  initialize: function(options) {
     if(!options || options.playerX === undefined || options.playerO === undefined) {
       throw new Error('Game must be given two player names');
     }
@@ -30,23 +29,23 @@ const instanceProps = {
 
     // Tracking turns happens behind the scenes and is not an attribute
     this.turn = 1;
-  };
+  },
 
   // Instance Methods
-  instanceProps.playerX = function() {
+  playerX: function() {
     return this.get('players')[0];
-  };
+  },
 
-  instanceProps.playerO = function() {
+  playerO: function() {
     return this.get('players')[1];
-  };
+  },
 
-  instanceProps.currentPlayer = function() {
+  currentPlayer: function() {
     return (this.turn % 2 === 0) ? this.playerO()
                                 : this.playerX();
-  };
+  },
 
-  instanceProps.play = function(position) {
+  play: function(position) {
     if(!Game.isValidPosition(position)) {
       throw new Error('play() requires a valid board cell position');
     }
@@ -64,9 +63,9 @@ const instanceProps = {
     this.trigger('change', this);
 
     this.turn++;
-  };
+  },
 
-  instanceProps.outcome = function() {
+  outcome: function() {
     var self = this;
     var isWin = function(pos1, pos2, pos3) {
       return self.boardAt(pos1) === self.boardAt(pos2) &&
@@ -100,17 +99,17 @@ const instanceProps = {
     });
 
     return outcome;
-  };
+  },
 
-  instanceProps.boardAt = function(position) {
+  boardAt: function(position) {
     if(!Game.isValidPosition(position)) {
       throw new Error('boardAt() requires a valid board cell position');
     }
 
     return this.get('board')[position];
-  };
+  },
 
-  instanceProps.playerMark = function(player) {
+  playerMark: function(player) {
     if(player === this.playerX()) {
       return 'X';
     } else if(player === this.playerO()) {
@@ -118,9 +117,9 @@ const instanceProps = {
     } else {
       throw new Error(`${player} is not one of the game's players`);
     }
-  };
+  },
 
-  instanceProps.boardString = function() {
+  boardString: function() {
     var self = this;
     var rowString = function(row) {
       var r0 = self.boardAt(row * 3 + 0),
@@ -140,25 +139,27 @@ const instanceProps = {
       rowString(1) +
       dividerString() +
       rowString(2));
-  };
+  },
 
-  instanceProps.printBoard = function() {
+  printBoard: function() {
     console.log(this.boardString());
-  };
+  }
+};
 
-const staticProps = {};
+const staticProps = {
 
   // Static Methods
-  staticProps.isValidPosition = function(position) {
+  isValidPosition: function(position) {
     return Number.isInteger(position) && (position >= this.BOARD_POS_MIN &&
                                           position <= this.BOARD_POS_MAX);
-  };
+  },
 
   // Constants
-  staticProps.LAST_TURN = 9;
-  staticProps.BOARD_POS_MIN = 0;
-  staticProps.BOARD_POS_MAX = 8;
-  staticProps.EMPTY_CELL = ' ';
+  LAST_TURN: 9,
+  BOARD_POS_MIN: 0,
+  BOARD_POS_MAX: 8,
+  EMPTY_CELL: ' '
+};
 
 // Inherit from the Base model instead of Backbone.Model
 // this allows us to use the custom overrides from Base.
