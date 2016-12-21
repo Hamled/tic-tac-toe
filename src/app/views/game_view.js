@@ -1,6 +1,10 @@
 import Backbone from 'backbone';
 
 const GameView = Backbone.View.extend({
+  initialize: function() {
+    this.listenTo(this.model, 'change', this.render);
+  },
+
   render: function() {
     const placedTiles = this.$('.placed-tiles');
 
@@ -23,13 +27,19 @@ const GameView = Backbone.View.extend({
   },
 
   events: {
-    'click button': 'onPlay'
+    'click .cell': 'onPlay'
   },
 
   onPlay: function(e) {
-    var pos = this.$('input').val();
-    this.model.play(Number.parseInt(pos));
-    this.render();
+    const cell = e.target;
+    const position = this.posFromCell(cell);
+
+    this.model.play(position);
+  },
+
+  posFromCell: function(cell) {
+    const cellID = this.$(cell).attr('id');
+    return Number.parseInt(cellID.replace('cell-', ''));
   }
 });
 
