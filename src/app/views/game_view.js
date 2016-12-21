@@ -50,11 +50,13 @@ const GameView = Backbone.View.extend({
       this.$el.append(this.msgTemplate({
         message: message
       }));
+      this.delegateEvents();
     }
   },
 
   events: {
-    'click .cell': 'onPlay'
+    'click .cell': 'onPlay',
+    'click .restart': 'onRestart'
   },
 
   onPlay: function(e) {
@@ -67,7 +69,11 @@ const GameView = Backbone.View.extend({
   posFromCell: function(cell) {
     const cellID = this.$(cell).attr('id');
     return Number.parseInt(cellID.replace('cell-', ''));
-  }
+  },
+
+  onRestart: function(e) {
+    this.trigger('restart');
+  },
 });
 
 export default GameView;

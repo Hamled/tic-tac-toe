@@ -7,6 +7,7 @@ const ApplicationView = Backbone.View.extend({
     this.gameView = new GameView({
       el: this.$('#board')
     });
+    this.listenTo(this.gameView, 'restart', this.newGame);
 
     this.newGame();
   },
