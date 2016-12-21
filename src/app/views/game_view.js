@@ -3,8 +3,12 @@ import Backbone from 'backbone';
 
 const GameView = Backbone.View.extend({
   initialize: function() {
-    this.listenTo(this.model, 'change', this.render);
     this.msgTemplate = _.template(Backbone.$('#tmpl-overlay-msg').html());
+  },
+
+  setGame: function(game) {
+    this.model = game;
+    this.listenTo(this.model, 'change', this.render);
   },
 
   render: function() {
@@ -43,7 +47,7 @@ const GameView = Backbone.View.extend({
     }
 
     if(message !== undefined) {
-      this.$('#board').append(this.msgTemplate({
+      this.$el.append(this.msgTemplate({
         message: message
       }));
     }
