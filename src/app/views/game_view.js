@@ -1,14 +1,20 @@
+import _ from 'underscore';
 import Backbone from 'backbone';
 
 const GameView = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model, 'change', this.render);
+    this.msgTemplate = _.template(Backbone.$('#tmpl-overlay-msg').html());
   },
 
   render: function() {
     const placedTiles = this.$('.placed-tiles');
 
-    placedTiles.empty(); // Clear out any tiles we currently have
+    // Clear out any existing content
+    placedTiles.empty();
+    this.$('.overlay').remove();
+
+    // Draw all of the current tiles
     for(var i = 0; i < 9; i++) {
       const row = Math.floor(i/3),
             col = i%3,
@@ -23,6 +29,23 @@ const GameView = Backbone.View.extend({
           ${val}
         </div>
       `));
+    }
+
+    // If the game is over, show that
+    const outcome = this.model.get('outcome');
+    let message;
+    if(outcome === 'X') {
+      message = `${this.model.playerX()} has won!`;
+    } else if(outcome === 'O') {
+      message = `${this.model.playerO()} has won!`;
+    } else if(outcome === ' ') {
+      message = 'It\'s a draw!';
+    }
+
+    if(message !== undefined) {
+      this.$('#board').append(this.msgTemplate({
+        message: message
+      }));
     }
   },
 
