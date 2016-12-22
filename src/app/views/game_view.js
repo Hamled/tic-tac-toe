@@ -48,7 +48,8 @@ const GameView = Backbone.View.extend({
 
     if(message !== undefined) {
       this.$el.append(this.msgTemplate({
-        message: message
+        message: message,
+        showSave: this.model.isNew()
       }));
       this.delegateEvents();
     }
@@ -77,7 +78,10 @@ const GameView = Backbone.View.extend({
   },
 
   onSave: function(e) {
-    this.model.save();
+    const self = this;
+    this.model.save().done(function() {
+      self.render();
+    });
   }
 });
 

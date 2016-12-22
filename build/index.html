@@ -29,7 +29,9 @@
         <div class="message">
           <h1><%- message %></h1>
           <a class="restart waves-effect waves-light btn-large">Play Again</a>
-          <a class="save waves-effect waves-light btn-large">Save</a>
+          <% if(showSave) { %>
+            <a class="save waves-effect waves-light btn-large">Save</a>
+          <% } %>
         </div>
       </div>
     </script>
