@@ -146,6 +146,18 @@ const Game = Base.extend({
 
   printBoard: function() {
     console.log(this.boardString());
+  },
+
+  toJSON: function() {
+    // Call the super-class implementation
+    const json = Base.prototype.toJSON.call(this);
+
+    // Fix the outcome attribute
+    if(json.outcome === ' ') {
+      json.outcome = 'draw';
+    }
+
+    return json;
   }
 }, {
 
