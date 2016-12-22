@@ -41,6 +41,29 @@ html {
   padding: 0.5rem 0;
 }
 
+.setup-form {
+  background: #bbada0;
+  border-radius: 0.5rem;
+  height: 20rem;
+  margin: 1rem auto;
+  position: relative;
+  width: 20rem;
+
+  text-align: center;
+}
+
+.setup-form h1 {
+  font-size: 2rem;
+  line-height: inherit;
+  margin-top: 0;
+}
+
+.setup-form h2 {
+  font-size: 1.5rem;
+  line-height: inherit;
+}
+
+
 .cell {
   background: rgba(238, 228, 218, 0.35);
   border-radius: 0.5rem;
