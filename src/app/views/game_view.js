@@ -56,7 +56,8 @@ const GameView = Backbone.View.extend({
 
   events: {
     'click .cell': 'onPlay',
-    'click .restart': 'onRestart'
+    'click .restart': 'onRestart',
+    'click .save': 'onSave'
   },
 
   onPlay: function(e) {
@@ -74,6 +75,10 @@ const GameView = Backbone.View.extend({
   onRestart: function(e) {
     this.trigger('restart');
   },
+
+  onSave: function(e) {
+    this.model.save();
+  }
 });
 
 export default GameView;
