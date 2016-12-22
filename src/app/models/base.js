@@ -16,7 +16,7 @@ const Base = Backbone.Model.extend({
   toJSON: function() {
     const self = this;
     const json = Backbone.Model.prototype.toJSON.call(this);
-    return _.mapObject(json, function(attr, value) {
+    return _.mapObject(json, function(value, attr) {
       return _.isFunction(value) ? value.call(self) : value;
     });
   },
