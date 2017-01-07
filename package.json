@@ -5,6 +5,7 @@
   "main": "./bin/app.bundle.js",
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server",
+    "build": "webpack",
     "test": "jasmine",
     "repl": "babel-node"
   },
