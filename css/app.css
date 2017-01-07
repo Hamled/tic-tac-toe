@@ -1,0 +1,102 @@
+/* Modified from: https://github.com/AdaGold/2048/blob/master/stylesheets/2048.css */
+
+html {
+  font: normal normal 30px/1 "Nunito", "Helvetica Neue", Arial, sans-serif;
+}
+
+#board {
+  background: #bbada0;
+  border-radius: 0.5rem;
+  height: 20rem;
+  margin: 1rem auto;
+  position: relative;
+  width: 20rem;
+}
+
+.overlay {
+  border-radius: 0.5rem;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.message {
+  width: 100%;
+  text-align: center;
+}
+
+.message h1 {
+  color: white;
+  text-shadow: black 2px 2px 2px;
+  background-color: rgba(0, 0, 0, 0.65);
+
+  font-size: 2rem;
+  line-height: inherit;
+  padding: 0.5rem 0;
+}
+
+.setup-form {
+  background: #bbada0;
+  border-radius: 0.5rem;
+  height: 20rem;
+  margin: 1rem auto;
+  position: relative;
+  width: 20rem;
+
+  text-align: center;
+}
+
+.setup-form h1 {
+  font-size: 2rem;
+  line-height: inherit;
+  margin-top: 0;
+}
+
+.setup-form h2 {
+  font-size: 1.5rem;
+  line-height: inherit;
+}
+
+
+.cell {
+  background: rgba(238, 228, 218, 0.35);
+  border-radius: 0.5rem;
+  float: left;
+  height: 6rem;
+  margin: 0.5rem 0 0 0.5rem ;
+  width: 6rem;
+}
+
+.tile {
+  position: absolute;
+  top: 0; left: 0;
+
+  color: #f9f6f2;
+  background: #000;
+
+  border-radius: 0.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 6rem;
+  height: 6rem;
+  margin: 0.5rem 0 0 0.5rem ;
+  text-align: center;
+  width: 6rem;
+}
+
+.tile[data-row=r0] { top: 0; }
+.tile[data-row=r1] { top: 6.5rem; }
+.tile[data-row=r2] { top: 13rem; }
+
+.tile[data-col=c0] { left: 0; }
+.tile[data-col=c1] { left: 6.5rem; }
+.tile[data-col=c2] { left: 13rem; }
+
+.tile[data-val="X"]    { color: #776e65; background-color: #eee4da; }
+.tile[data-val="O"]   { background: #f65e3b; }
